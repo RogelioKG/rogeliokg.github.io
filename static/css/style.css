@@ -1,0 +1,113 @@
+/******************** Main Starts ********************/
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/******************** Main Ends ********************/
+
+/******************** Cool Background Starts ********************/
+body {
+  background:
+    linear-gradient(135deg, #1a1a1a 25%, transparent 25%) -50px 0,
+    linear-gradient(225deg, #1a1a1a 25%, transparent 25%) -50px 0,
+    linear-gradient(315deg, #1a1a1a 25%, transparent 25%),
+    linear-gradient(45deg, #1a1a1a 25%, transparent 25%);
+  background-size: 20px 20px;
+  background-color: #1e1e1e;
+  animation: moving-background 10s linear infinite;
+}
+
+@keyframes moving-background {
+  from {
+    background-position: 50px 0, 50px 0, 0 0, 0 0;
+  }
+
+  to {
+    background-position: 50px -100px, 50px -100px, 0 -100px, 0 -100px;
+  }
+}
+/******************** Cool Background Ends ********************/
+
+/******************** Card Starts ********************/
+#card {
+  display: none;
+}
+
+.card {
+  display: block;
+  height: 70%;
+  aspect-ratio: 4/7;
+  position: relative;
+}
+
+@supports not (aspect-ratio: 1 / 1) {
+  .card {
+    width: calc(4/7 * 70%);
+  }
+}
+
+.front,
+.back {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  backface-visibility: hidden;
+  transition: 500ms;
+}
+
+.front {
+  transform: rotateY(0);
+}
+
+.back {
+  transform: rotateY(-180deg);
+}
+
+/* 滑鼠設備用 hover */
+.card:hover .front {
+  transform: rotateY(180deg);
+}
+
+.card:hover .back {
+  transform: rotateY(0);
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  box-shadow: 20px 20px 20px 0px rgba(0, 0, 0, 0.2);
+}
+/******************** Card Ends ********************/
+
+/******************** Mobile Starts ********************/
+@media (hover: none) {
+  /* 觸控設備用點的 */
+  #card:checked + .card .front {
+    transform: rotateY(180deg);
+  }
+
+  #card:checked + .card .back {
+    transform: rotateY(0);
+  }
+
+  #card:not(:checked) + .card .front {
+    transform: rotateY(0);
+  }
+  
+  #card:not(:checked) + .card .back {
+    transform: rotateY(-180deg);
+  }
+}
+/******************** Mobile Ends ********************/
